@@ -1,30 +1,126 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+
+    <!-- bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .container {
+            margin-top: 50px;
+        }
+
+        .card-header {
+            font-size: 28px;
+            
+        }
+
+        a {
+            float: left;
+        }
+
+        .card-body {
+            text-align: center;
+        }
+
+        .btn {
+            margin-top: 20px;
+            margin-right: 10px;
+            background-color: green;
+        }
+        #title{
+            margin-left: 400px;
+        }
+    </style>
+
+
 </head>
+
 <body>
 
-<script>
+    <!-- div container holding the title, text box, and buttons-->
+    <div class="container">
 
-    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var outPut = "";
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                        <p id="title">Password Generator</p>
 
-    function passGen(num){
-        if(num >= 8 && num <= 128){
-      for(var i = 0; i < num; i++){
-        outPut += characters[Math.floor(Math.random() * characters.length)];
-      }
-      return outPut;
-        } else {
-            alert("Please choose a number between 8 and 128");
+
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <textarea rows="4" cols="50">
+                                        </textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 offset-md-4">
+                                    <a href="#" class="btn btn-primary">Generate Password</a>
+                                    <a href="#" class="btn btn-primary">Copy to Clipboard</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <script>
+
+        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        var outPut = "";
+
+        function passGen(num) {
+            //if statement to verify that the length chosen is between 8 and 128.
+            if (num >= 8 && num <= 128) {
+                //for loop, looping through characters array
+                for (var i = 0; i < num; i++) {
+                    outPut += characters[Math.floor(Math.random() * characters.length)];
+                }
+                return outPut;
+            } else {
+                alert("Please choose a number between 8 and 128");
+            }
+            //for loop, looping through outPut to verify each character type is used at least once
+            for (var j = 0; j < outPut.length; j++) {
+
+            }
+
+
+
         }
-    }
-    console.log(passGen(75));
-    
-</script>
+        console.log(passGen(75));
+
+
+
+    </script>
 </body>
+
 </html>
