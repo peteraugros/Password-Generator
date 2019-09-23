@@ -32,6 +32,13 @@
         #title {
             margin-left: 400px;
         }
+        input{
+            text-align: center;
+        }
+        textarea{
+            text-align: center;
+            margin-top: 30px;
+        }
     </style>
 
 
@@ -60,14 +67,14 @@
                                 <form action="/action_page.php">
                                     How long do you want your password?
                                     <br>
-                                    <input type="text" name="fname">
+                                    <input type="text" id="number">
                                 </form>
                             </div>
 
                             <!-- buttons for passGen and copy to clipboard -->
                             <div class="row">
                                 <div class="col-sm-6 offset-md-4">
-                                    <a href="#" class="btn btn-primary" onclick="passGen(10)">Generate Password</a>
+                                    <a href="#" class="btn btn-primary" onclick="getNum()">Generate Password</a>
                                     <a href="#" class="btn btn-primary">Copy to Clipboard</a>
                                 </div>
                             </div>
@@ -100,6 +107,13 @@
 
         var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
         var outPut = "";
+        var userNum;
+
+        function getNum(){
+            userNum = document.getElementById("number").value;
+            passGen(userNum);
+        }
+       
 
         function passGen(num) {
             //if statement to verify that the length chosen is between 8 and 128.
