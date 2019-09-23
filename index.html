@@ -14,12 +14,16 @@
     var outPut = "";
 
     function passGen(num){
+        if(num >= 8 && num <= 128){
       for(var i = 0; i < num; i++){
         outPut += characters[Math.floor(Math.random() * characters.length)];
       }
       return outPut;
+        } else {
+            alert("Please choose a number between 8 and 128");
+        }
     }
-    console.log(passGen(21));
+    console.log(passGen(75));
     
 </script>
 </body>
