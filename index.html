@@ -15,26 +15,21 @@
         .container {
             margin-top: 50px;
         }
-
         .card-header {
             font-size: 28px;
-            
         }
-
         a {
             float: left;
         }
-
         .card-body {
             text-align: center;
         }
-
         .btn {
             margin-top: 20px;
             margin-right: 10px;
             background-color: green;
         }
-        #title{
+        #title {
             margin-left: 400px;
         }
     </style>
@@ -53,17 +48,26 @@
                     <div class="card-header">
                         <p id="title">Password Generator</p>
 
-
+                        <!-- text-area -->
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <textarea rows="4" cols="50">
-                                        </textarea>
+                                    <textarea rows="4" cols="50" id="text-area"></textarea>      
                                 </div>
                             </div>
+                            <!-- input for password length -->
+                            <div class="col-sm-6 offset-md-3">
+                                <form action="/action_page.php">
+                                    How long do you want your password?
+                                    <br>
+                                    <input type="text" name="fname">
+                                </form>
+                            </div>
+
+                            <!-- buttons for passGen and copy to clipboard -->
                             <div class="row">
                                 <div class="col-sm-6 offset-md-4">
-                                    <a href="#" class="btn btn-primary">Generate Password</a>
+                                    <a href="#" class="btn btn-primary" onclick="passGen(10)">Generate Password</a>
                                     <a href="#" class="btn btn-primary">Copy to Clipboard</a>
                                 </div>
                             </div>
@@ -104,19 +108,13 @@
                 for (var i = 0; i < num; i++) {
                     outPut += characters[Math.floor(Math.random() * characters.length)];
                 }
-                return outPut;
+
             } else {
                 alert("Please choose a number between 8 and 128");
             }
-            //for loop, looping through outPut to verify each character type is used at least once
-            for (var j = 0; j < outPut.length; j++) {
-
-            }
-
-
-
+            document.getElementById("text-area").innerHTML = outPut;
         }
-        console.log(passGen(75));
+
 
 
 
