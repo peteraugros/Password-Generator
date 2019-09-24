@@ -12,32 +12,32 @@
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
     <style>
-        .container {
-            margin-top: 50px;
+        body {
+            background-color: black;
         }
-        .card-header {
-            font-size: 28px;
-        }
-        a {
-            float: left;
-        }
-        .card-body {
-            text-align: center;
-        }
+
         .btn {
-            margin-top: 20px;
-            margin-right: 10px;
-            background-color: green;
+            margin: 0 auto;
+          
         }
-        #title {
-            margin-left: 400px;
+
+        .card {
+            text-align: center;
+            height: 50%;
+        }
+
+        h3 {
+            margin: 0 auto;
+            margin-bottom: 10px;
         }
         input{
+            margin: 0 auto;
+            margin-bottom: 20px;
             text-align: center;
         }
-        textarea{
+        #text-area{
             text-align: center;
-            margin-top: 30px;
+            font-size: 25px;
         }
     </style>
 
@@ -47,82 +47,71 @@
 <body>
 
     <!-- div container holding the title, text box, and buttons-->
-    <div class="container">
 
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                        <p id="title">Password Generator</p>
+    <div class="contianer">
+        <div class="card">
 
-                        <!-- text-area -->
-                        <div class="card-body">
-                            <div class="row">
-                                <div class="col-sm-12">
-                                    <textarea rows="4" cols="50" id="text-area"></textarea>      
-                                </div>
-                            </div>
-                            <!-- input for password length -->
-                            <div class="col-sm-6 offset-md-3">
-                                <form action="/action_page.php">
-                                    How long do you want your password?
-                                    <br>
-                                    <input type="text" id="number">
-                                </form>
-                            </div>
 
-                            <!-- buttons for passGen and copy to clipboard -->
-                            <div class="row">
-                                <div class="col-sm-6 offset-md-4">
-                                    <a href="#" class="btn btn-primary" onclick="getNum()">Generate Password</a>
-                                    <a href="#" class="btn btn-primary" onclick="copy()">Copy to Clipboard</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+            <h5 class="card-header">Password Generator</h5>
+
+            <div class="card-body">
+                <textarea rows="4" cols="50" id="text-area">
+                        </textarea>
+                <div class="row">
+                    <h3 class="col-md-6">Choose the desired number of characters</h3>
+                </div>
+                <div class="row">
+                    <input type="text" name="lname" class="col-md-3" id="number"><br>
+                </div>
+                <div class="row">
+                    <a href="#" class="btn btn-primary col-md-3" onclick="getNum()">Generate Password</a>
+                    <a href="#" class="btn btn-primary col-md-3" onclick="copy()">Copy to Clipboard</a>
                 </div>
             </div>
+
         </div>
     </div>
 
 
-    <script>
 
-        var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-        var outPut = "";
-        var userNum;
 
-        function getNum(){
-            userNum = document.getElementById("number").value;
-            passGen(userNum);
-        }
-       
-        function passGen(num) {
-            //if statement to verify that the length chosen is between 8 and 128.
-            if (num >= 8 && num <= 128) {
-                //for loop, looping through characters array
-                for (var i = 0; i < num; i++) {
-                    outPut += characters[Math.floor(Math.random() * characters.length)];
-                }
+        <script>
 
-            } else {
-                alert("Please choose a number between 8 and 128");
+            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            var outPut = "";
+            var userNum;
+
+            function getNum() {
+                userNum = document.getElementById("number").value;
+                passGen(userNum);
             }
-            document.getElementById("text-area").innerHTML = outPut;
-        }
 
-        function copy(){
-            var copyText = document.getElementById("text-area");
-            copyText.select();
-            document.execCommand("copy");
-            alert("Copied the text: " + copyText.value);
-        }
+            function passGen(num) {
+
+                //if statement to verify that the length chosen is between 8 and 128.
+                if (num >= 8 && num <= 128) {
+                    //for loop, looping through characters array
+                    for (var i = 0; i < num; i++) {
+                        outPut += characters[Math.floor(Math.random() * characters.length)];
+                    }
+
+                } else {
+                    alert("Please choose a number between 8 and 128");
+                }
+                document.getElementById("text-area").innerHTML = outPut;
+            }
+
+            function copy() {
+                var copyText = document.getElementById("text-area");
+                copyText.select();
+                document.execCommand("copy");
+                alert("Copied the text: " + copyText.value);
+            }
 
 
-       
 
-    </script>
+
+        </script>
 </body>
 
 </html>
-
