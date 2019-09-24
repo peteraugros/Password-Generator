@@ -80,12 +80,19 @@
         <script>
 
             var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+            var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var lowers ="abcdefghijklmnopqrstuvwxyz";
+            var numbers = "0123456789";
+            var specials = "!@#$%^&*()'";
+
+            var counter = 0;
             var outPut = "";
             var userNum;
 
             function getNum() {
                 userNum = document.getElementById("number").value;
                 passGen(userNum);
+               
             }
 
             function passGen(num) {
@@ -95,12 +102,14 @@
                     //for loop, looping through characters array
                     for (var i = 0; i < num; i++) {
                         outPut += characters[Math.floor(Math.random() * characters.length)];
+                      
                     }
 
                 } else {
                     alert("Please choose a number between 8 and 128");
                 }
                 document.getElementById("text-area").innerHTML = outPut;
+                check(outPut);
             }
 
             function copy() {
@@ -108,12 +117,72 @@
                 copyText.select();
                 document.execCommand("copy");
                 alert("Copied the text: " + copyText.value);
+                document.getElementById("text-area").innerHTML = "";
+                document.getElementById("number").innerHTML = "";
+                
+            }
+
+            function check(str){
+
+                var regex = /[A-Z]/g;
+                var regex2 = /[a-z]/g;
+                var regex3 = /[0-9]/g;
+                var regex4 = /[!@#$%^&*()]/g;
+
+                var found = str.match(regex);
+                var found2 = str.match(regex2);
+                var found3 = str.match(regex3);
+                var found4 = str.match(regex4);
+                
+                if(found.length > 0){
+                    counter++;
+                } else {
+                    alert("Your password does not have all recommended characters, please refresh and try again.")
+                    document.getElementById("text-area").innerHTML = ""; 
+                    document.getElementById("number").innerHTML = ""; 
+                    outPut = "";
+                    counter = 0;
+                }
+                
+                if(found2.length > 0){
+                    counter++
+                } else {
+                    alert("Your password does not have all recommended characters, please refresh and try again.")
+                    document.getElementById("text-area").innerHTML = "";
+                    document.getElementById("number").innerHTML = ""; 
+                    outPut = "";
+                    counter = 0;
+                }
+                if(found3.length > 0){
+                    counter++
+                } else {
+                    alert("Your password does not have all recommended characters, please refresh and try again.")
+                    document.getElementById("text-area").innerHTML = "";
+                    document.getElementById("number").innerHTML = ""; 
+                    outPut = "";
+                    counter = 0;
+                }
+
+                if(found4.length > 0){
+                    counter++
+                } else {
+                    alert("Your password does not have all recommended characters, please refresh and try again.")
+                    document.getElementById("text-area").innerHTML = "";
+                    outPut = "";
+                    counter = 0;
+                }
+
+                if(counter === 4){
+                    alert("Your password has all recommended characters.");
+                    document.getElementById("text-area").innerHTML = "";
+                    document.getElementById("number").innerHTML = ""; 
+                } 
+console.log(counter);
             }
 
 
 
-
-        </script>
+</script>
 </body>
 
 </html>
