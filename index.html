@@ -18,7 +18,7 @@
 
         .btn {
             margin: 0 auto;
-            
+
         }
 
         .card {
@@ -30,14 +30,20 @@
             margin: 0 auto;
             margin-bottom: 10px;
         }
-        input{
+
+        input {
             margin: 0 auto;
             margin-bottom: 20px;
             text-align: center;
         }
-        #text-area{
+
+        #text-area {
             text-align: center;
             font-size: 25px;
+        }
+
+        #clear {
+            margin-top: 20px;
         }
     </style>
 
@@ -51,138 +57,140 @@
     <div class="contianer">
         <div class="card">
 
-
+            <!-- header -->
             <h5 class="card-header">Password Generator</h5>
-
+            <!-- card body -->
             <div class="card-body">
+
+                <!-- textarea -->
                 <textarea rows="4" cols="50" id="text-area">
                         </textarea>
                 <div class="row">
                     <h3 class="col-md-6">Choose the desired number of characters</h3>
                 </div>
                 <div class="row">
-                    <input type="text" name="lname" class="col-md-3" id="number"><br>
-                </div>
-                <div class="row">
-                    <div class="col-md-6 offset-md-3">
-                    <a href="#" class="btn btn-primary" onclick="getNum()">Generate Password</a>
-                    <a href="#" class="btn btn-primary" onclick="copy()">Copy to Clipboard</a>
+                    <div class="col-md-2 btn">
+                        <tbody>
+                            <tr>
+                                <td class="leftcol"><label for="lcl">Use upper-case letters</label></td>
+                                <td class="rightcol"><input type="checkbox" name="uppercase" id="ucl" value=1;></td>
+                            </tr>
+                            <tr>
+                                <td class="leftcol"><label for="ucl">Use lower-case letters</label></td>
+                                <td class="rightcol"><input type="checkbox" name="lowercase" id="lcl"></td>
+                            </tr>
+                            <tr>
+                                <td class="leftcol"><label for="numbers">Use numbers</label></td>
+                                <td class="rightcol"><input type="checkbox" name="numbers" id="numbers"></td>
+                            </tr>
+                            <tr>
+                                <td class="leftcol"><label for="specials">Use special characters</label></td>
+                                <td class="rightcol"><input type="checkbox" name="specials" id="specials"></td>
+                            </tr>
+
+                        </tbody>
+
+                        <div class="row">
+                            <input type="text" name="lname" class="col-md-3" id="number"><br>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-primary" onclick="getNum()">Generate Password</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="#" class="btn btn-primary" onclick="copy()">Copy to Clipboard</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 
 
 
 
-        <script>
+    <script>
 
-            var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-            var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-            var lowers ="abcdefghijklmnopqrstuvwxyz";
-            var numbers = "0123456789";
-            var specials = "!@#$%^&*()'";
+        var characters = "";
+        var caps = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        var lowers = "abcdefghijklmnopqrstuvwxyz";
+        var numbers = "0123456789";
+        var specials = "!@#$%^&*()'";
 
-            var counter = 0;
-            var outPut = "";
-            var userNum;
+        var counter = 0;
+        var outPut = "";
+        var userNum;
 
-            function getNum() {
-                userNum = document.getElementById("number").value;
-                passGen(userNum);
-               
+
+
+        function getNum() {
+            userNum = document.getElementById("number").value;
+            document.getElementById("text-area").innerHTML = "";
+            passGen(userNum);
+        }
+
+        function passGen(num) {
+
+            var upperCaseCheckbox = document.getElementById("ucl").checked;
+            var lowerCaseCheckbox = document.getElementById("lcl").checked;
+            var numberCheckbox = document.getElementById("numbers").checked;
+            var specialCheckbox = document.getElementById("specials").checked;
+
+            //including the checked values into the variable characters
+            if (upperCaseCheckbox === true) {
+                characters += caps;
             }
 
-            function passGen(num) {
-
-                //if statement to verify that the length chosen is between 8 and 128.
-                if (num >= 8 && num <= 128) {
-                    //for loop, looping through characters array
-                    for (var i = 0; i < num; i++) {
-                        outPut += characters[Math.floor(Math.random() * characters.length)];
-                      
-                    }
-
-                } else {
-                    alert("Please choose a number between 8 and 128");
-                }
-                document.getElementById("text-area").innerHTML = outPut;
-                check(outPut);
+            if (lowerCaseCheckbox === true) {
+                characters += lowers;
             }
 
-            function copy() {
-                var copyText = document.getElementById("text-area");
-                copyText.select();
-                document.execCommand("copy");
-                alert("Copied the text: " + copyText.value);
-                document.getElementById("text-area").innerHTML = "";
-                document.getElementById("number").innerHTML = "";
-                
+            if (numberCheckbox === true) {
+                characters += numbers;
             }
 
-            function check(str){
-
-                var regex = /[A-Z]/g;
-                var regex2 = /[a-z]/g;
-                var regex3 = /[0-9]/g;
-                var regex4 = /[!@#$%^&*()]/g;
-
-                var found = str.match(regex);
-                var found2 = str.match(regex2);
-                var found3 = str.match(regex3);
-                var found4 = str.match(regex4);
-                
-                if(found.length > 0){
-                    counter++;
-                } else {
-                    alert("Your password does not have all recommended characters, please refresh and try again.")
-                    document.getElementById("text-area").innerHTML = ""; 
-                    document.getElementById("number").innerHTML = ""; 
-                    outPut = "";
-                    counter = 0;
-                }
-                
-                if(found2.length > 0){
-                    counter++
-                } else {
-                    alert("Your password does not have all recommended characters, please refresh and try again.")
-                    document.getElementById("text-area").innerHTML = "";
-                    document.getElementById("number").innerHTML = ""; 
-                    outPut = "";
-                    counter = 0;
-                }
-                if(found3.length > 0){
-                    counter++
-                } else {
-                    alert("Your password does not have all recommended characters, please refresh and try again.")
-                    document.getElementById("text-area").innerHTML = "";
-                    document.getElementById("number").innerHTML = ""; 
-                    outPut = "";
-                    counter = 0;
-                }
-
-                if(found4.length > 0){
-                    counter++
-                } else {
-                    alert("Your password does not have all recommended characters, please refresh and try again.")
-                    document.getElementById("text-area").innerHTML = "";
-                    outPut = "";
-                    counter = 0;
-                }
-
-                if(counter === 4){
-                    alert("Your password has all recommended characters.");
-                    document.getElementById("text-area").innerHTML = "";
-                    document.getElementById("number").innerHTML = ""; 
-                } 
-console.log(counter);
+            if (specialCheckbox === true) {
+                characters += specials;
             }
 
+            //if statement to verify that the length chosen is between 8 and 128.
+            if (num >= 8 && num <= 128) {
+                //for loop, looping through characters array
+                for (var i = 0; i < num; i++) {
+                    outPut += characters[Math.floor(Math.random() * characters.length)];
+
+                }
+
+            } else {
+                alert("Please choose a number between 8 and 128");
+            }
+            //outputing the result to the text area
+            document.getElementById("text-area").textContent = outPut;
+            //resetting the characters variable
+            characters = "";
+        }
+
+        function copy() {
+            var copyText = document.getElementById("text-area");
+            copyText.select();
+            document.execCommand("copy");
+            alert("Copied the text: " + copyText.value);
+            document.getElementById("text-area").textContent = "";
+            document.getElementById("number").value = "";
+
+        }
 
 
-</script>
+
+
+
+
+
+
+    </script>
 </body>
 
 </html>
